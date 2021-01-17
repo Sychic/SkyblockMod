@@ -38,6 +38,12 @@ public class DamageSplashEntity extends FakeEntity {
     public DamageSplashEntity(String damage, Location currentLocation) {
         super(currentLocation);
 
+        if(damage == null) {
+            System.out.println("damage null");
+            remove();
+            return;
+        }
+
         Matcher symbolMatcher = Pattern.compile("\\d+(.?)").matcher(damage);
         if (symbolMatcher.matches()) {
             color = Damage.fromSymbol(symbolMatcher.group(1)).getColor();
