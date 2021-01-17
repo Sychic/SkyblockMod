@@ -3,7 +3,7 @@ package me.Danker.gui;
 import me.Danker.DankersSkyblockMod;
 import me.Danker.commands.ToggleCommand;
 import me.Danker.handlers.ConfigHandler;
-import me.Danker.handlers.TextRenderer;
+import me.Danker.utils.graphics.TextRenderer;
 import me.Danker.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

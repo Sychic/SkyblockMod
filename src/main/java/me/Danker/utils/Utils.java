@@ -2,7 +2,7 @@ package me.Danker.utils;
 
 import me.Danker.DankersSkyblockMod;
 import me.Danker.handlers.ScoreboardHandler;
-import me.Danker.handlers.TextRenderer;
+import me.Danker.utils.graphics.TextRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -45,6 +45,7 @@ public class Utils {
 									  1065000, 1410000, 1900000, 2500000, 3300000, 4300000, 5600000, 7200000, 9200000, 12000000, 15000000,
 									  19000000, 24000000, 30000000, 38000000, 48000000, 60000000, 75000000, 93000000, 116250000};
 	static int[] expertiseKills = {50, 100, 250, 500, 1000, 2500, 5500, 10000, 15000};
+	static Random random = new Random();
 	
     public static int getItems(String item) {
     	Minecraft mc = Minecraft.getMinecraft();
@@ -482,6 +483,10 @@ public class Utils {
 			default:
 				return null;
 		}
+	}
+
+	public static Random getRandom() {
+    	return random;
 	}
 	
 }

@@ -1,6 +1,6 @@
 package me.Danker.gui.buttons;
 
-import me.Danker.handlers.TextRenderer;
+import me.Danker.utils.graphics.TextRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
