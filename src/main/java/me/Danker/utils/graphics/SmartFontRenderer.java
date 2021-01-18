@@ -120,9 +120,9 @@ public class SmartFontRenderer extends FontRenderer {
 
     private float drawCritText(String input, float x, float y, TextAlignment alignment, TextShadow shadow) {
         if (alignment == TextAlignment.MIDDLE)
-            return drawRainbowText(input, x - getStringWidth(input) / 2.0f, y, TextAlignment.LEFT_RIGHT, shadow);
+            return drawCritText(input, x - getStringWidth(input) / 2.0f, y, TextAlignment.LEFT_RIGHT, shadow);
         else if (alignment == TextAlignment.RIGHT_LEFT)
-            return drawRainbowText(input, x - getStringWidth(input), y, TextAlignment.LEFT_RIGHT, shadow);
+            return drawCritText(input, x - getStringWidth(input), y, TextAlignment.LEFT_RIGHT, shadow);
 
         posX = x; posY = y;
 
@@ -136,7 +136,7 @@ public class SmartFontRenderer extends FontRenderer {
 
             float red = 255.0F /*(float)(color >> 16 & 255) / 255.0F*/;
             float blue = (float)(color >> 8 & 255) / 255.0F;
-            float green = (float)(color & 255) / 255.0F;
+            float green = 0.0F/* (float)(color & 255) / 255.0F*/;
 
             // rendering shadows
             float originPosX = posX; float originPosY = posY;

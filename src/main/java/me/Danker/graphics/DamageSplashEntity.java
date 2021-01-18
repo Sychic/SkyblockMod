@@ -34,24 +34,28 @@ public class DamageSplashEntity extends FakeEntity {
     String displayText;
     private float scale = 1f;
     private CustomColor color;
+    private boolean love = false;
 
     public DamageSplashEntity(String damage, Location currentLocation) {
         super(currentLocation);
 
-        if(damage == null) {
-            System.out.println("damage null");
-            remove();
-            return;
-        }
-
         Matcher symbolMatcher = Pattern.compile("\\d+(.?)").matcher(damage);
         if (symbolMatcher.matches()) {
-            color = Damage.fromSymbol(symbolMatcher.group(1)).getColor();
-            damage = damage.replace(symbolMatcher.group(1),"");
+            String symbol = symbolMatcher.group(1);
+            if (symbolMatcher.group(1).contains("♥")) {
+                love = true;
+                symbol.replace("♥", "");
+            }
+            color = Damage.fromSymbol(symbol).getColor();
+            damage = damage.replace(symbol,"");
         }
 
 
         displayText = NumberFormat.format(Long.parseLong(damage));
+
+        if (love) {
+            displayText += "♥";
+        }
 
         UUID uuid = new UUID(Utils.getRandom().nextLong(), Utils.getRandom().nextLong());
 
