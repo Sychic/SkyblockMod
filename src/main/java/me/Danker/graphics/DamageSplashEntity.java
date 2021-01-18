@@ -45,6 +45,7 @@ public class DamageSplashEntity extends FakeEntity {
             if (symbolMatcher.group(1).contains("♥")) {
                 love = true;
                 symbol.replace("♥", "");
+                damage.replace("♥","");
             }
             color = Damage.fromSymbol(symbol).getColor();
             damage = damage.replace(symbol,"");
