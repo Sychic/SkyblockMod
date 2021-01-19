@@ -42,20 +42,32 @@ public class DamageSplashEntity extends FakeEntity {
         Matcher symbolMatcher = Pattern.compile("\\d+(.?)").matcher(damage);
         if (symbolMatcher.matches()) {
             String symbol = symbolMatcher.group(1);
-            if (symbolMatcher.group(1).contains("♥")) {
+            if (symbol.contains("❤")) {
                 love = true;
-                symbol.replace("♥", "");
-                damage.replace("♥","");
+                symbol = symbol.replace("❤", "");
+                damage = damage.replace("❤","");
             }
-            color = Damage.fromSymbol(symbol).getColor();
+            try {
+                color = Damage.fromSymbol(symbol).getColor();
+            } catch (NullPointerException e ) {
+                for(int i = 0; i< symbol.length(); i++) {
+                    System.out.println( "\\u" + Integer.toHexString(symbol.charAt(i) | 0x10000).substring(1) );
+                }
+            }
             damage = damage.replace(symbol,"");
         }
 
 
-        displayText = NumberFormat.format(Long.parseLong(damage));
+        try {
+            displayText = NumberFormat.format(Long.parseLong(damage));
+        } catch (NumberFormatException n) {
+            for(char c : damage.toCharArray()) {
+                System.out.println( "\\u" + Integer.toHexString(c | 0x10000).substring(1) );
+            }
+        }
 
         if (love) {
-            displayText += "♥";
+            displayText += '❤';
         }
 
         UUID uuid = new UUID(Utils.getRandom().nextLong(), Utils.getRandom().nextLong());

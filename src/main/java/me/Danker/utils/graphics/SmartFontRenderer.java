@@ -131,12 +131,10 @@ public class SmartFontRenderer extends FontRenderer {
 
             // color settings
             long time = System.currentTimeMillis() - dif;
-            float z = 2000.0F;
-            int color = Color.HSBtoRGB((float) (time % (int) z) / z, 0.8F, 0.8F);
 
-            float red = 255.0F /*(float)(color >> 16 & 255) / 255.0F*/;
-            float blue = (float)(color >> 8 & 255) / 255.0F;
-            float green = 0.0F/* (float)(color & 255) / 255.0F*/;
+            float red = 1.0F;
+            float blue = 85.0F / 255.0F;
+            float green = (85.0F * (float)Math.cos(time % 2000 * Math.PI / 1000) + 170) / 255.0F;
 
             // rendering shadows
             float originPosX = posX; float originPosY = posY;

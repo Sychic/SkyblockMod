@@ -9,6 +9,7 @@ public enum Damage {
     CRITICAL("✧", CommonColors.CRITICAL),
     PET("♞", CommonColors.MAGENTA),
     WITHER("☠", CommonColors.BLACK),
+    SKULL("✷", CommonColors.GRAY),
     TRUE("❂", CommonColors.WHITE),
     FIRE("火", CommonColors.ORANGE),
     NORMAL("", CommonColors.LIGHT_GRAY);

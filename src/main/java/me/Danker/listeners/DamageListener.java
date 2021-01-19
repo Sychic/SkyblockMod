@@ -39,7 +39,7 @@ public class DamageListener {
         if (!entity.hasCustomName()) return;
         if (e.entity.isDead) return;
 
-        Pattern damagePattern = Pattern.compile("✧*(\\d+.?)");
+        Pattern damagePattern = Pattern.compile("✧*(\\d+✧?❤?♞?)");
         String strippedName = StringUtils.stripControlCodes(entity.getCustomNameTag());
         Matcher damageMatcher = damagePattern.matcher(strippedName);
 
