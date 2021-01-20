@@ -7,16 +7,11 @@ import me.Danker.utils.Utils;
 import me.Danker.utils.enums.Damage;
 import me.Danker.utils.graphics.ScreenRenderer;
 import me.Danker.utils.graphics.SmartFontRenderer;
-import me.Danker.utils.graphics.colors.CommonColors;
 import me.Danker.utils.NumberFormat;
 import me.Danker.utils.graphics.colors.CustomColor;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import tv.twitch.chat.Chat;
 
 import java.util.Random;
 import java.util.UUID;
@@ -39,32 +34,19 @@ public class DamageSplashEntity extends FakeEntity {
     public DamageSplashEntity(String damage, Location currentLocation) {
         super(currentLocation);
 
-        Matcher symbolMatcher = Pattern.compile("\\d+(.?)").matcher(damage);
+        Matcher symbolMatcher = Pattern.compile("(\\d+)(.+)").matcher(damage);
         if (symbolMatcher.matches()) {
-            String symbol = symbolMatcher.group(1);
+            String symbol = symbolMatcher.group(2);
+            damage = symbolMatcher.group(1);
             if (symbol.contains("❤")) {
                 love = true;
                 symbol = symbol.replace("❤", "");
-                damage = damage.replace("❤","");
             }
-            try {
-                color = Damage.fromSymbol(symbol).getColor();
-            } catch (NullPointerException e ) {
-                for(int i = 0; i< symbol.length(); i++) {
-                    System.out.println( "\\u" + Integer.toHexString(symbol.charAt(i) | 0x10000).substring(1) );
-                }
-            }
-            damage = damage.replace(symbol,"");
+
+            color = Damage.fromSymbol(symbol).getColor();
         }
 
-
-        try {
-            displayText = NumberFormat.format(Long.parseLong(damage));
-        } catch (NumberFormatException n) {
-            for(char c : damage.toCharArray()) {
-                System.out.println( "\\u" + Integer.toHexString(c | 0x10000).substring(1) );
-            }
-        }
+        displayText = NumberFormat.format(Long.parseLong(damage));
 
         if (love) {
             displayText += '❤';
