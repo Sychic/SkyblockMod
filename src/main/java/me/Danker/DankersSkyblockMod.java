@@ -1,12 +1,14 @@
 package me.Danker;
 
-import akka.event.Logging;
 import com.google.gson.JsonObject;
 import me.Danker.commands.*;
 import me.Danker.gui.*;
 import me.Danker.handlers.*;
+import me.Danker.listeners.DamageListener;
 import me.Danker.utils.TicTacToeUtils;
 import me.Danker.utils.Utils;
+import me.Danker.utils.graphics.ScreenRenderer;
+import me.Danker.utils.graphics.TextRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -69,7 +71,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.net.URLDecoder;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
@@ -198,6 +199,7 @@ public class DankersSkyblockMod {
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new PacketHandler());
+        MinecraftForge.EVENT_BUS.register(new DamageListener());
 
         ConfigHandler.reloadConfig();
 
@@ -2654,6 +2656,8 @@ public class DankersSkyblockMod {
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (event.phase != Phase.START) return;
+
+        ScreenRenderer.refresh();
 
         Minecraft mc = Minecraft.getMinecraft();
         World world = mc.theWorld;

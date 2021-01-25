@@ -1,4 +1,4 @@
-package me.Danker.handlers;
+package me.Danker.utils.graphics;
 
 import me.Danker.commands.ToggleCommand;
 import net.minecraft.client.Minecraft;
